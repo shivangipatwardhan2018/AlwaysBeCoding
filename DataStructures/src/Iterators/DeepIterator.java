@@ -2,16 +2,15 @@ package Iterators;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 import java.util.function.Consumer;
 
-/**
- * Created by shivangipatwardhan on 3/1/18.
- */
-public class DeepIterator<Object> implements Iterator<Integer>{
+
+public class DeepIterator<T> implements Iterator<Integer>{
 
     Integer nextElement = null;
-    Stack<Object> iteratorStack = new Stack<>();
+    private final Stack<Iterator<?>> iteratorStack = new Stack<>();
 
 //    Constructor
     public DeepIterator(Collection<Object> coll){
@@ -19,22 +18,36 @@ public class DeepIterator<Object> implements Iterator<Integer>{
             throw new ExceptionInInitializerError("no collection specified");
         }
 
-        iteratorStack.push((Object) coll.iterator());
+        iteratorStack.push(coll.iterator());
     }
 
     @Override
     public boolean hasNext() {
+        if(nextElement != null){
+            return true;
+        }
 
         while(!iteratorStack.empty()){
 
-            Object topElement = iteratorStack.peek();
-            if(topElement instanceof Integer){
-                nextElement = (Integer) topElement;
-            }else{
-                //Its a new iterator
-                
-            }
+            Iterator<?> nextIterator = iteratorStack.peek();
 
+            if(nextIterator.hasNext()){
+                Object item = nextIterator.next();
+                if(nextIterator instanceof Collection<?>){
+
+                    //Push on an iterator for that object
+                    iteratorStack.push(((Collection<?>) nextIterator).iterator());
+
+                }else{
+                    nextElement = (Integer) item;
+                    return true;
+                }
+
+            }else {
+
+                //Remove the element
+                iteratorStack.pop();
+            }
 
         }
         return false;
@@ -42,16 +55,23 @@ public class DeepIterator<Object> implements Iterator<Integer>{
 
     @Override
     public Integer next() {
-        return null;
+       Integer returnValue;
+       if(hasNext()){
+           returnValue = nextElement;
+           nextElement = null;
+           return returnValue;
+       }
+
+       throw new NoSuchElementException("No next element");
     }
 
     @Override
     public void remove() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void forEachRemaining(Consumer<? super Integer> action) {
-
+        throw new UnsupportedOperationException();
     }
 }

@@ -1,4 +1,4 @@
-package DataStructures.model;
+package model;
 
 /**
  * Created by shivangipatwardhan on 2/19/18.
