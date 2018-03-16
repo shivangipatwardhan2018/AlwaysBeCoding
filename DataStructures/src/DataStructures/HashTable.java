@@ -5,7 +5,7 @@ package DataStructures;
  */
 public class HashTable {
 
-    LinkedList[] hashTable;
+    LinkedList<Number>[] hashTable;
 
     public int hashKey(String key){
         return key.hashCode();
