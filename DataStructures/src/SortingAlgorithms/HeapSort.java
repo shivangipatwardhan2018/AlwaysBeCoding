@@ -3,6 +3,12 @@ package SortingAlgorithms;
 
 public class HeapSort {
 
+//    Heapsort is not stable it can change the order of equal items
+//    Quicksort and Heapsort will both run in O(n log(n)).
+//    But Quicksort will execute faster because its constant factors are
+//    smaller than the constant factors for Heapsort.
+//    To put it simply, partitioning is faster than maintaining the heap.
+
     private void heapsort(int[] arr) {
 
         int numElements = arr.length;
@@ -16,6 +22,8 @@ public class HeapSort {
             int temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
+
+//            Number of elements is now reduced
             heapify(arr, i, 0);
         }
 

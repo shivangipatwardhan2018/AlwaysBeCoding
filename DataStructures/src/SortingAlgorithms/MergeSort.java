@@ -23,9 +23,6 @@ public class MergeSort {
 
     private void mergesort(int[] elements, int start, int end) {
 
-//        if(elements.length == 1){
-//            return;
-//        }
         if(start < end){
             int middle = (end + start)/2;
 
