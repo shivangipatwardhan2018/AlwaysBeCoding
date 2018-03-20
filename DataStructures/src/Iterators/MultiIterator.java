@@ -27,8 +27,6 @@ public class MultiIterator<T> implements Iterator<T>{
             return true;
         }
 
-
-
         return false;
     }
 

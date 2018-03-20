@@ -11,7 +11,6 @@ public class MagicIndex {
     // Will there be negative numbers
     // input format, expected output
 
-
   public int magicalIndexRecurseNotDistinct(int[] input){
       if(input == null) return -1;
       if(input.length == 0)  return (input[0] == 0) ? 0: -1;

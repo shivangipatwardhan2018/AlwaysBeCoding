@@ -2,9 +2,6 @@ package Algorithms;
 
 import java.util.ArrayList;
 
-/**
- * Created by shivangipatwardhan on 3/1/18.
- */
 public class PascalsTriangle {
 
     public ArrayList<ArrayList<Integer>> generatePascalsTriangle(int rowNum){
