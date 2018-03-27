@@ -32,4 +32,7 @@ public class TreeNode{
     public void setRight(TreeNode right) {
         this.right = right;
     }
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

@@ -2,6 +2,9 @@ package BinaryTrees;
 
 import model.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Given the root of a binary tree recursively print the (in/pre/post)-order
  * traversals to standard out.
@@ -14,6 +17,34 @@ import model.TreeNode;
  */
 
 public class BinaryTreeTraversal {
+
+    public void levelOrderTraversal(TreeNode root, List<List<Integer>> input, int height){
+
+        if(root != null){
+            return;
+        }
+
+        List<Integer> current;
+        if(height >= input.size()){
+            current = new ArrayList<>();
+            current.add(root.getValue());
+            input.add(current);
+        }else{
+            current = input.get(height);
+            current.add(root.getValue());
+        }
+        levelOrderTraversal(root.getLeft(), input, height + 1);
+        levelOrderTraversal(root.getRight(), input, height + 1);
+    }
+
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> soln = new ArrayList<List<Integer>>();
+        if(root == null){
+            return null;
+        }
+        levelOrderTraversal(root, soln, 0);
+        return soln;
+    }
 
 
     public static void inorderTraversal(TreeNode root) {
